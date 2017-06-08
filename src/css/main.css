@@ -1,0 +1,65 @@
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+.conteiner{
+    width: fit-content;
+    min-width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.list p,
+.list .todo,
+.list .delete{
+    display: inline;
+}
+.list{
+    margin-top: 25px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+.delete{
+    font-weight: bold;
+    float: right;
+    margin: 0 5px;
+}
+.delete:hover{
+    color: #660066;
+    cursor: pointer;
+}
+p{
+    margin: 0 5px;
+}
+.add{
+    margin: 10px auto;
+}
+input[type=text] {
+    width: 75%;
+    border: none;
+    border-bottom: 2px solid red;
+}
+input[type="text"]:focus {
+    outline:0;
+}
+.lable{
+    width: fit-content;
+    margin: 0 auto;
+    font-size: 95px;
+    color: #660066;
+}
+.addTodo{
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50; /* Green */
+}
+.addTodo:hover{
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+.addTodo:focus{
+    outline: none;
+}
+.listItem:hover{
+    cursor: pointer;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
