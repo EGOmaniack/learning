@@ -7,12 +7,16 @@
     margin: 0 auto;
     margin-top: 50px;
 }
-.list p,
-.list .todo,
-.list .delete{
+#list .todo{
     display: inline;
 }
-.list{
+.delete{
+    display: none;
+}
+.listItem:hover .delete{
+    display: inline;
+}
+#list{
     margin-top: 25px;
     padding: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
@@ -25,9 +29,6 @@
 .delete:hover{
     color: #660066;
     cursor: pointer;
-}
-p{
-    margin: 0 5px;
 }
 .add{
     margin: 10px auto;
@@ -46,20 +47,70 @@ input[type="text"]:focus {
     font-size: 95px;
     color: #660066;
 }
-.addTodo{
+.btn{
     background-color: white;
     color: black;
     border: 2px solid #4CAF50; /* Green */
 }
-.addTodo:hover{
+.btn:hover{
     background-color: #4CAF50; /* Green */
     color: white;
 }
-.addTodo:focus{
+.btn:focus{
     outline: none;
+}
+#saveTodo{
+    margin: 20px;
 }
 .listItem:hover{
     cursor: pointer;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
     background-color: white;
+}
+
+.p {
+  width: 12px;
+  height: 12px;
+  position: relative;
+  margin: 0 5px;
+  background: #fcfff4;
+  background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.p label {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  background: -webkit-linear-gradient(top, #222222 0%, #45484d 100%);
+  background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+}
+.p label:after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background: #27ae60;
+  background: -webkit-linear-gradient(top, #27ae60 0%, #145b32 100%);
+  background: linear-gradient(to bottom, #27ae60 0%, #145b32 100%);
+  opacity: 0;
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.p label:hover::after {
+  opacity: 0.3;
+}
+.p input[type=checkbox] {
+  visibility: hidden;
+}
+.p input[type=checkbox]:checked + label:after {
+  opacity: 1;
 }
