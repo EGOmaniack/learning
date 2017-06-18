@@ -43,7 +43,7 @@ class List {
         let newTask = new Task({id: newLabel.id, label: newLabel.label, done: newLabel.done});
         this.taskList.push(newTask);
     }
-    getTasks(thisList){
+    getTasks(){
         var request = new XMLHttpRequest();
         request.open('GET', 'http://egomaniack.ru/lessons/ToDo/getToDo.php?nick=' + nick + '&list=false', true);
         let self = this;
@@ -53,9 +53,9 @@ class List {
                 let resp = request.responseText;
                 resp = JSON.parse(resp);
                 resp.forEach((task)=>{
-                    thisList.addTask(task);
+                    self.addTask(task);
                 });
-                thisList.render();
+                self.render();
             } else {
                 // We reached our target server, but it returned an error
                 return "error";
@@ -74,13 +74,14 @@ class List {
             this.addInput.value = '';
         }
     }
-    save(thisList){
+    save(){
+        let self = this;
         var request = new XMLHttpRequest(); //http://egomaniack.ru
         request.open('POST', 'http://egomaniack.ru/lessons/ToDo/save.php', true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        request.send('input=' + JSON.stringify(thisList.taskList) + '&nick=' + nick + '&list=false');
+        request.send('input=' + JSON.stringify(self.taskList) + '&nick=' + nick + '&list=false');
         request.onload = function(){
-            thisList.render(request.responseText);
+            self.render(request.responseText);
         }
     }
     delTask(id){
