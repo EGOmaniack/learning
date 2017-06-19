@@ -16,7 +16,7 @@ class List {
         this.domList = document.getElementById('list');
         this.addInput = document.getElementById('addInput');
         this.addButton = document.getElementById('addTodo');
-        this.addButton.onclick = ()=>{this.AddElement(this)};
+        this.addButton.onclick = ()=>this.AddElement(this);
     }
     toggleTaskDone(id){
         this.taskList.forEach(task => {
@@ -45,25 +45,18 @@ class List {
     }
     getTasks(){
         var request = new XMLHttpRequest();
-        request.open('GET', 'http://egomaniack.ru/lessons/ToDo/getToDo.php?nick=' + nick + '&list=false', true);
-        let self = this;
-        request.onload = function() {
+        request.open('GET', `http://egomaniack.ru/lessons/ToDo/getToDo.php?nick=${ nick }&list=false`, true);
+        request.onload = () => {
             if (request.status >= 200 && request.status < 400) {
                 // Success!
-                let resp = request.responseText;
-                resp = JSON.parse(resp);
-                resp.forEach((task)=>{
-                    self.addTask(task);
-                });
-                self.render();
+                JSON.parse(request.responseText).forEach(task => this.addTask(task));
+                this.render();
             } else {
-                // We reached our target server, but it returned an error
-                return "error";
+                console.error("We reached our target server, but it returned an error");
             }
         };
-        request.onerror = function() {
-            // There was a connection error of some sort
-            return "error";
+        request.onerror = () => {
+            console.error("There was a connection error of some sort");
         };
         request.send();
     }
@@ -75,17 +68,13 @@ class List {
         }
     }
     save(){
-        let self = this;
-        var request = new XMLHttpRequest(); //http://egomaniack.ru
+        var request = new XMLHttpRequest();
         request.open('POST', 'http://egomaniack.ru/lessons/ToDo/save.php', true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-        request.send('input=' + JSON.stringify(self.taskList) + '&nick=' + nick + '&list=false');
-        request.onload = function(){
-            self.render(request.responseText);
-        }
+        request.send(`input=${ JSON.stringify(this.taskList) }&nick=${ nick }&list=false`);
+        request.onload = () => this.render(request.responseText)
     }
     delTask(id){
-        console.log(id);
         this.taskList = this.taskList.filter(value => value.id != id);
         this.render();
     }

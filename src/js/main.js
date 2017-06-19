@@ -23,8 +23,8 @@ const nick = "EGOmaniack";
 let list = new List();
 
 saveTodo.onclick = () => {
-    list.save(list);
+    list.save();
 };
 
-list.getTasks(list);
+list.getTasks();
 const addButton = document.getElementById('addTodo');
